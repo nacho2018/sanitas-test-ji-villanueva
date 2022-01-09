@@ -43,6 +43,11 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<!--sleuth dependendency for tracing-->
+		<dependency>  
+			<groupId>org.springframework.cloud</groupId>  
+			<artifactId>spring-cloud-starter-sleuth</artifactId>  
+		</dependency>
 	</dependencies>
 	<dependencyManagement>
 		<dependencies>

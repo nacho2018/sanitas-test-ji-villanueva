@@ -2,6 +2,8 @@ package com.sanitas.operations.sv_operations.controllers;
 
 import java.util.Optional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +18,7 @@ import com.sanitas.operations.utilities.Constants;
 @RestController
 public class OperationsController {
 
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
     private OperationsService operationsService;
@@ -38,10 +41,15 @@ public class OperationsController {
         			sOperation.equalsIgnoreCase(Constants.OPERATOR_SUBTRACT))){
         				throw ex;
         	}
-            return operationsService.operate(
+        	
+        	String result = operationsService.operate(
             		Float.parseFloat(configuration.getOperand1()),
             		Float.parseFloat(configuration.getOperand2()),
             		sOperation);
+        	
+            logger.info("operation result is " + result);
+            
+            return result;
         }
 }
 
