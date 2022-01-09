@@ -39,6 +39,7 @@ Pruebas del servicio por gateway:
  - http://localhost:8765/sv_operations/execute/subtract
 
 
+La carpeta local_tests contiene carpetas con captura de pantalla de pruebas locales en cada servidor y sus interacciones.
 
 Orden de lanzamiento de módulos
 --------------------------------
