@@ -13,7 +13,8 @@ import brave.sampler.Sampler;
 @EnableDiscoveryClient
 @ComponentScan(basePackages = {"com.sanitas.operations.sv_operations.controllers",
 		"com.sanitas.operations.sv_operations.services",
-		"com.sanitas.operations.sv_operations.components"})
+		"com.sanitas.operations.sv_operations.components",
+		"com.sanitas.operations.sv_operations.logging"})
 public class SvOperationsApplication {
 	
 	

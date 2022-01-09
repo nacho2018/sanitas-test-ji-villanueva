@@ -48,6 +48,12 @@
 			<groupId>org.springframework.cloud</groupId>  
 			<artifactId>spring-cloud-starter-sleuth</artifactId>  
 		</dependency>
+		<!--tracer from sanitas-->
+		<dependency>
+			<groupId>com.sanitas.logs</groupId>
+			<artifactId>tracer</artifactId>
+			<version>1.0.0</version>
+		</dependency>
 	</dependencies>
 	<dependencyManagement>
 		<dependencies>

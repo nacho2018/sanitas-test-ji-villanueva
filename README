@@ -12,7 +12,22 @@ Llamadas locales a las operaciones:
 http://localhost:8080/excecute/sum
 http://localhost:8080/excecute/subtract
 
-Configurado para generación de trazas en las requests, ver consola estándard tras una llamada desde el apigateway (explicado más adelante).
+Configuración del Trazador en el rest api
+-----------------------------------------
+Configurado para trazas distribuidas con Spring Cloud Sleuth e incorpora el api tracer de sanitas(tracer-1.0.0.jar)
+Incorporación de tracer-1.0.0.jar al repositorio local de librerías maven:
+
+ejecutar :
+mvn install:install-file -Dfile=path/to/tracer-1.0.0.jar -DgroupId=com.sanitas.logs -DartifactId=stracer -Dversion=1.0.0 -Dpackaging=jar
+
+Incluir en pom.xml de sv_operation la dependencia:
+<dependency>
+			<groupId>com.sanitas.logs</groupId>
+			<artifactId>tracer</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+
+
 
 - spring-cloud-config-server => servidor cloud enlazado al servicio rest, proporciona al servicio los operandos del servicio dependiendo del tipo de perfil configurado en el servicio.
 Se ejecuta por el puerto 8888
