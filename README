@@ -1,3 +1,10 @@
+Requisitos
+----------
+Tener instalados en local los siguientes componentes en un sistema windows 10:
+Ejemplos de paths para variables de entorno:
+	-jdk 8 (JAVA_HOME => C:\Program Files\Java\jdk1.8.0_311)
+	- maven 3.6.3 (M2_HOME => C:\Users\<user>\<any_path>\apache-maven-3.6.3)
+
 Módulos que componen el microservicio
 -------------------------------------
 - sv_operations => servicio rest api que realiza una suma o una diferencia entre dos números no paramétricos, vienen de fichero de configuración o del servidor cloud.
@@ -5,12 +12,39 @@ Llamadas locales a las operaciones:
 http://localhost:8080/excecute/sum
 http://localhost:8080/excecute/subtract
 
+Configurado para generación de trazas en las requests, ver consola estándard tras una llamada desde el apigateway (explicado más adelante).
+
 - spring-cloud-config-server => servidor cloud enlazado al servicio rest, proporciona al servicio los operandos del servicio dependiendo del tipo de perfil configurado en el servicio.
 Se ejecuta por el puerto 8888
 
+La ruta del repositorio de git donde se encuentran los parámetros del servicio es:
+https://github.com/nacho2018/git-sanitas-ji-villanueva
+Para configurar el fichero de datos del perfil:
+	- Abrir el repositorio: https://github.com/nacho2018/git-sanitas-ji-villanueva (pub)
+	- Actualmente dos ficheros de datos con perfiles: default y dev.
+El servicio actualmente configurado para extraer los datos desde el fichero de dev (operands-service.properties) pero es configurable en el fichero bootstrap del proyecto de servicio. (bootstrap.properties de sv_operations, clave: spring.profiles.active).
+
 - netflix-eureka-naming-server => servidor rest para servicios cloud, dirige el servicio a través de una balanza de carga por la red.
-http://localhost:8761/ => abre interfaz que permite ver el servicio registrado.
+http://localhost:8761/ => abre eureka UI que permite ver el servicio registrado.
+Puerto otorgado al servicio:8100
+Prueba de servicio a través de eureka:
+	- http://localhost:8100/execute/sum
+	- http://localhost:8100/execute/subtract
 
 - netflix-zuul-api-gateway-server => servidor api gateway actúa como punto único punto de entrada del servicio y establece su enrutado y protocolo. 
 Está configurado para permite la asignación de trazas a las requests, permitiendo la trazabilidad de las peticiones, muy útil para depurar problemas.
+
+Pruebas del servicio por gateway:
+ - http://localhost:8765/sv_operations/execute/sum
+ - http://localhost:8765/sv_operations/execute/subtract
+
+
+
+Orden de lanzamiento de módulos
+--------------------------------
+- spring-cloud-config-server
+- netflix-eureka-naming-server
+- sv_operations
+- netflix-zuul-api-gateway-server
+
 
