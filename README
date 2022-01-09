@@ -1,0 +1,16 @@
+Módulos que componen el microservicio
+-------------------------------------
+- sv_operations => servicio rest api que realiza una suma o una diferencia entre dos números no paramétricos, vienen de fichero de configuración o del servidor cloud.
+Llamadas locales a las operaciones:
+http://localhost:8080/excecute/sum
+http://localhost:8080/excecute/subtract
+
+- spring-cloud-config-server => servidor cloud enlazado al servicio rest, proporciona al servicio los operandos del servicio dependiendo del tipo de perfil configurado en el servicio.
+Se ejecuta por el puerto 8888
+
+- netflix-eureka-naming-server => servidor rest para servicios cloud, dirige el servicio a través de una balanza de carga por la red.
+http://localhost:8761/ => abre interfaz que permite ver el servicio registrado.
+
+- netflix-zuul-api-gateway-server => servidor api gateway actúa como punto único punto de entrada del servicio y establece su enrutado y protocolo. 
+Está configurado para permite la asignación de trazas a las requests, permitiendo la trazabilidad de las peticiones, muy útil para depurar problemas.
+
