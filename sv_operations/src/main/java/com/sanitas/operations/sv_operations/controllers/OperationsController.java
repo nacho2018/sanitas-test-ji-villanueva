@@ -12,12 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.sanitas.operations.sv_operations.components.Configuration;
-import com.sanitas.operations.sv_operations.logging.MyLogger;
 import com.sanitas.operations.sv_operations.services.OperationsService;
 import com.sanitas.operations.utilities.Constants;
-
-import io.corp.calculator.TracerAPI;
-import io.corp.calculator.TracerImpl;
 
 @RestController
 public class OperationsController {
@@ -30,10 +26,6 @@ public class OperationsController {
 
     @Autowired
     Configuration configuration;
-    
-    @Autowired
-    MyLogger<String> myLogger;
-
 
     @GetMapping("/execute/{operation}")
     public String execute(@PathVariable Optional<String> operation) throws Exception{
@@ -56,7 +48,7 @@ public class OperationsController {
             		sOperation);
         	
             logger.info("operation result is " + result);
-            myLogger.trace(result);
+
             return result;
         }
 }
